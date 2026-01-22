@@ -3,6 +3,16 @@ import Card from './components/Card';
 
 export default function App() {
   const [isActive, setIsActive] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const activities = [
+    'Completó el curso de React avanzado',
+    'Publicó un nuevo proyecto en GitHub',
+    'Ganó la insignia de contribuidor',
+    'Compartió un artículo sobre Tailwind',
+    'Se unió a la comunidad de desarrolladores'
+  ];
 
   return (
     <div className="min-h-screen bg-white p-8 space-y-12">
@@ -115,6 +125,73 @@ export default function App() {
             </div>
           </div>
         </nav>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Ejercicio 10: Mini proyecto final - Página de perfil</h2>
+        
+        <nav className="bg-blue-600 p-4 rounded-lg mb-6 shadow-lg">
+          <div className="flex justify-between items-center">
+            <div className="text-white font-bold text-xl">Perfil</div>
+            <button 
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden text-white"
+            >
+              {menuOpen ? '✕' : '☰'}
+            </button>
+            <div className="hidden md:flex gap-6">
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200">Inicio</a>
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200">Proyectos</a>
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200">Contacto</a>
+            </div>
+          </div>
+          {menuOpen && (
+            <div className="md:hidden mt-4 flex flex-col gap-2">
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 py-2">Inicio</a>
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 py-2">Proyectos</a>
+              <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 py-2">Contacto</a>
+            </div>
+          )}
+        </nav>
+
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 max-w-md">
+          <div className="flex flex-col items-center">
+            <img 
+              src="https://static.wikia.nocookie.net/seriesspain/images/7/7e/Fermin_9.png/revision/latest?cb=20161126232012&path-prefix=es" 
+              alt="FerminTrujillo"
+              className="w-24 h-24 rounded-full mb-4 border-4 border-blue-500"
+            />
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Manuel Vega</h3>
+            <p className="text-gray-600 text-center mb-4">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit ullam et.
+            </p>
+            
+            <button 
+              onClick={() => setIsFollowing(!isFollowing)}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 ${
+                isFollowing 
+                  ? 'bg-gray-300 text-gray-700 hover:bg-gray-400' 
+                  : 'bg-blue-500 text-white hover:bg-blue-600'
+              }`}
+            >
+              {isFollowing ? 'Siguiendo' : 'Seguir'}
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 text-gray-800">Actividades recientes</h3>
+          <ul className="space-y-3">
+            {activities.map((activity, index) => (
+              <li 
+                key={index}
+                className="p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                <p className="text-gray-700">{activity}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </div>
   )
